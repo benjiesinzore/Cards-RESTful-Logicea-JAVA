@@ -1,0 +1,368 @@
+{
+	"info": {
+		"_postman_id": "b0a6e807-a315-4d1e-b3b4-0a85d122dcde",
+		"name": "Logicea",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4422006"
+	},
+	"item": [
+		{
+			"name": "Cards",
+			"item": [
+				{
+					"name": "Add Card",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZW1iZXIxQGdtYWlsLmNvbSIsImV4cCI6MTcxMzc5NTc0NCwiaWF0IjoxNzEzNzc3NzQ0fQ.A_7TIrtfm-CgUTn2o6-CpQAAIowgQQGB2A9ALUiF4U6T8s-DM4jrGncleWstePcW-C8iADl2rT72dZnbpxwZlQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Member 1 - 4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/cards",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCards",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZW1iZXIxQGdtYWlsLmNvbSIsImV4cCI6MTcxNDA5Njc4MywiaWF0IjoxNzEzNzk2NzgzfQ.lBh9FOkGP1ge_P-m0rWyQwbt0sUqXE1AtPM4hEJtQaUUHkPQoKuTeh51vo7o9uYrdDeGMRYBDsmA7DJZx0ChJg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "name",
+								"value": "test",
+								"type": "text"
+							},
+							{
+								"key": "color",
+								"value": "test",
+								"type": "text"
+							},
+							{
+								"key": "status",
+								"value": "IN_PROGRESS",
+								"type": "text"
+							},
+							{
+								"key": "startDate",
+								"value": "2024-04-21",
+								"type": "text"
+							},
+							{
+								"key": "endDate",
+								"value": "2024-04-22",
+								"type": "text"
+							},
+							{
+								"key": "sortBy",
+								"value": "name",
+								"type": "text"
+							},
+							{
+								"key": "page",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Member 1 - 2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/cards?name=&color=&status=TO_DO&startDate=&endDate&sortBy=name&page=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cards"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": ""
+								},
+								{
+									"key": "color",
+									"value": ""
+								},
+								{
+									"key": "status",
+									"value": "TO_DO"
+								},
+								{
+									"key": "startDate",
+									"value": ""
+								},
+								{
+									"key": "endDate",
+									"value": null
+								},
+								{
+									"key": "sortBy",
+									"value": "name"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCardById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZW1iZXIxQGdtYWlsLmNvbSIsImV4cCI6MTcxMzc5NTc0NCwiaWF0IjoxNzEzNzc3NzQ0fQ.A_7TIrtfm-CgUTn2o6-CpQAAIowgQQGB2A9ALUiF4U6T8s-DM4jrGncleWstePcW-C8iADl2rT72dZnbpxwZlQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Member 1 - 2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/cards/3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cards",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCardById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZW1iZXIxQGdtYWlsLmNvbSIsImV4cCI6MTcxMzc5NTc0NCwiaWF0IjoxNzEzNzc3NzQ0fQ.A_7TIrtfm-CgUTn2o6-CpQAAIowgQQGB2A9ALUiF4U6T8s-DM4jrGncleWstePcW-C8iADl2rT72dZnbpxwZlQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Member\",\r\n    \"color\": \"1231\",\r\n    \"description\": \"description\",\r\n    \"status\": \"DONE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/cards/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cards",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Member1UserLogin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"member1@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/authenticate",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Member2UserLogin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"member2@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/authenticate",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AdminUserLogin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"admin@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/authenticate",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCards",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJleHAiOjE3MTM3OTg3MzcsImlhdCI6MTcxMzc4MDczN30.fIwwiF1FGDVgkzfJE-yzv5WS3OJ2UXuWo1h9AFH9ubab31SDDrZFylwuQQiBPL7a6JSf2VSWMsQoE2thvTzfjg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/admin/cards",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"admin",
+						"cards"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8090/api",
+			"type": "string"
+		}
+	]
+}
