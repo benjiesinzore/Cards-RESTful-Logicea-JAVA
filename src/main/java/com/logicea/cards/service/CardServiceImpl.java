@@ -1,7 +1,6 @@
 package com.logicea.cards.service;
 
 import com.logicea.cards.models.Card;
-import com.logicea.cards.models.UserLogin;
 import com.logicea.cards.repos.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CardServiceImpl implements CardService {
@@ -20,11 +18,6 @@ public class CardServiceImpl implements CardService {
     @Autowired
     public CardServiceImpl(CardRepository cardRepository) {
         this.cardRepository = cardRepository;
-    }
-
-    @Override
-    public List<Card> findByUser(UserLogin userLogin) {
-        return cardRepository.findCardsByUserId(userLogin.getId());
     }
 
     @Override

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 22, 2024 at 12:18 PM
+-- Generation Time: Apr 22, 2024 at 02:51 PM
 -- Server version: 5.7.11
 -- PHP Version: 7.0.3
 
@@ -41,9 +41,10 @@ CREATE TABLE `cards` (
 --
 
 INSERT INTO `cards` (`id`, `name`, `description`, `color`, `status`, `userId`, `creationDate`) VALUES
-(1, 'Member 1', NULL, NULL, 'TO_DO', 2, '2024-04-22 10:42:03'),
-(2, 'Member', 'description', '1231', 'DONE', 2, '2024-04-22 10:42:03'),
-(3, 'Member 1 - 23', 'description', '1231313', 'DONE', 2, '2024-04-22 10:42:03');
+(1, 'Member 1', NULL, NULL, 'TO_DO', 2, '2024-04-01 10:42:03'),
+(2, 'Member', 'description', '#FFA500', 'TO_DO', 2, '2024-04-22 14:50:03'),
+(3, 'Member', 'description', '#FFA505', 'DONE', 2, '2024-04-22 10:42:03'),
+(4, 'Member', 'description', '#FFA501', 'DONE', 2, '2024-04-22 13:36:21');
 
 -- --------------------------------------------------------
 
@@ -93,7 +94,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cards`
 --
 ALTER TABLE `cards`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `users`
 --

@@ -4,19 +4,25 @@ import com.logicea.cards.dto.CardDTO;
 import com.logicea.cards.models.Card;
 import com.logicea.cards.service.AuthenticationService;
 import com.logicea.cards.service.CardService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+
 
 import javax.validation.Valid;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -42,12 +48,41 @@ public class MemberCardsController {
                                                @RequestParam String sortBy,
                                                @RequestParam(value = "page") Optional<Integer> page) {
         int evalPage = page.orElse(0) < 1 ? 0 : page.get() - 1;
+        Timestamp startD;
+        if (startDate.equals("")) {
+            startD = getLastTenDays();
+        } else {
+            startD = convertToTimeStamp(startDate);
+        }
+
+        Timestamp endD;
+        if (startDate.equals("")) {
+            endD = getNextDay();
+        } else {
+            endD = convertToTimeStamp(endDate);
+        }
 
         Page<Card> cards = cardService.findUserCardsByFiltersAndSort(
                 authenticationService.getLoggedInUser().getId(),
-                name, color, status, convertToTimeStamp(startDate), convertToTimeStamp(endDate)
+                name, color, status, startD, endD
                 , sortBy, PageRequest.of(evalPage, 2));
         return ResponseEntity.ok(cards);
+    }
+
+    private Timestamp getLastTenDays() {
+        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+        LocalDateTime currentDateTime = currentTimestamp.toLocalDateTime();
+        LocalDateTime tenDaysBeforeDateTime = currentDateTime.minusDays(10);
+        Timestamp timestamp = Timestamp.valueOf(tenDaysBeforeDateTime);
+        return timestamp;
+    }
+
+    private Timestamp getNextDay() {
+        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+        LocalDateTime currentDateTime = currentTimestamp.toLocalDateTime();
+        LocalDateTime tenDaysBeforeDateTime = currentDateTime.plusDays(1);
+        Timestamp timestamp = Timestamp.valueOf(tenDaysBeforeDateTime);
+        return timestamp;
     }
 
     private Timestamp convertToTimeStamp(String date) {
@@ -74,7 +109,11 @@ public class MemberCardsController {
     }
 
     @PostMapping
-    public ResponseEntity<Card> createCard(@RequestBody CardDTO cReq) {
+    public ResponseEntity<?> createCard(@RequestBody CardDTO cReq, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return validationHandling(bindingResult);
+        }
+
         Card card = new Card();
         card.setUserId(authenticationService.getLoggedInUser().getId());
         card.setName(cReq.getName());
@@ -91,8 +130,9 @@ public class MemberCardsController {
                                         @Valid @RequestBody CardDTO updatedCard,
                                         BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(bindingResult.getAllErrors());
+            return validationHandling(bindingResult);
         }
+
         Card existingCard = cardService.findByIdAndUserId(id, authenticationService.getLoggedInUser().getId());
         if (existingCard != null) {
             existingCard.setName(updatedCard.getName());
@@ -115,5 +155,17 @@ public class MemberCardsController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    private ResponseEntity<?> validationHandling(BindingResult bindingResult) {
+        Map<String, String> errorsMap = new HashMap<>();
+        for (FieldError error : bindingResult.getFieldErrors()) {
+            if (error.getField().equals("name")) {
+                errorsMap.put("name", error.getDefaultMessage());
+            } else if (error.getField().equals("color")) {
+                errorsMap.put("color", error.getDefaultMessage());
+            }
+        }
+        return ResponseEntity.badRequest().body(errorsMap);
     }
 }

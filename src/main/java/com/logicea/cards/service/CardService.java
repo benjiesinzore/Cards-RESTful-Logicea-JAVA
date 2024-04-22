@@ -11,9 +11,8 @@ import java.util.Optional;
 
 public interface CardService {
     // Members
-    List<Card> findByUser(UserLogin userLogin);
-
-    Page<Card> findUserCardsByFiltersAndSort(Integer userId, String name, String color, String status, Timestamp startDate, Timestamp endDate, String sortBy, Pageable page);
+    Page<Card> findUserCardsByFiltersAndSort(Integer userId, String name, String color, String status,
+                                             Timestamp startDate, Timestamp endDate, String sortBy, Pageable page);
 
     Card findById(Integer id);
     Card findByIdAndUserId(Integer id, Integer user);

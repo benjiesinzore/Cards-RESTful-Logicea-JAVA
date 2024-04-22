@@ -12,7 +12,6 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(nullable = false)
-
     private Integer userId;
     private String name;
     private String description;
