@@ -93,7 +93,6 @@ public class MemberCardsController {
         if (bindingResult.hasErrors()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(bindingResult.getAllErrors());
         }
-
         Card existingCard = cardService.findByIdAndUserId(id, authenticationService.getLoggedInUser().getId());
         if (existingCard != null) {
             existingCard.setName(updatedCard.getName());
@@ -106,7 +105,6 @@ public class MemberCardsController {
             return ResponseEntity.notFound().build();
         }
     }
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCard(@PathVariable Integer id) {
