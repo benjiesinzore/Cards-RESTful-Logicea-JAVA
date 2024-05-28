@@ -34,4 +34,9 @@ public class AdminCardsController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
         }
     }
+
+    @GetMapping
+    public String getMyName() {
+        return "Hello Benjamin!";
+    }
 }
